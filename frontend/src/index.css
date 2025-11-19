@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0f172a;
+  --secondary: #1e293b;
+  --accent: #14b8a6;
+  --accent-light: #2dd4bf;
+  --accent-dark: #0d9488;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --muted: #94a3b8;
+}
+
+* {
+  @apply transition-colors duration-200;
+}
+
+body {
+  @apply bg-primary text-slate-100 font-sans;
+}
+
+button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
