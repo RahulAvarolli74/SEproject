@@ -3,34 +3,50 @@
 import { Link } from "react-router-dom"
 import { useAuthStore } from "../store/authStore"
 import { useCartStore } from "../store/cartStore"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Navigation() {
   const { user, logout } = useAuthStore()
   const { items } = useCartStore()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener("scroll", onScroll)
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
-    <nav className="sticky top-0 z-50 bg-secondary border-b border-slate-700 shadow-lg">
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white/6 backdrop-blur-md border-b border-white/10 shadow-md" : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-white font-bold text-lg">C</span>
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${scrolled ? 'bg-white' : 'bg-white'}`}>
+              <span className={`${scrolled ? 'text-purple-600' : 'text-purple-600'} font-bold text-lg`}>S</span>
             </div>
-            <span className="text-white font-bold text-xl hidden sm:block">CourseHub</span>
+            <span className={`${scrolled ? 'text-white' : 'text-white'} font-bold text-xl hidden sm:block`}>SkillVerse</span>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/catalog" className="text-slate-300 hover:text-accent transition">
-              Catalog
-            </Link>
-            {user?.role === "instructor" && (
-              <Link to="/instructor" className="text-slate-300 hover:text-accent transition">
-                Teach
-              </Link>
+            {user && (
+              <>
+                <Link to="/catalog" className="text-slate-300 hover:text-accent transition">
+                  Catalog
+                </Link>
+                {user?.role === "instructor" && (
+                  <Link to="/instructor" className="text-slate-300 hover:text-accent transition">
+                    Teach
+                  </Link>
+                )}
+              </>
             )}
           </div>
 
@@ -92,9 +108,11 @@ export default function Navigation() {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden pb-4 border-t border-slate-700">
-            <Link to="/catalog" className="block py-2 text-slate-300 hover:text-accent">
-              Catalog
-            </Link>
+            {user && (
+              <Link to="/catalog" className="block py-2 text-slate-300 hover:text-accent">
+                Catalog
+              </Link>
+            )}
             {!user && (
               <>
                 <Link to="/login" className="block py-2 text-slate-300 hover:text-accent">
