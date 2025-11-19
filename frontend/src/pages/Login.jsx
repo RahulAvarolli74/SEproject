@@ -115,7 +115,7 @@ function Login() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <span className="text-white text-sm font-medium">✨ Welcome Back</span>
+            <span className="text-white text-sm font-medium"> Welcome Back</span>
           </motion.div>
 
           <motion.h1

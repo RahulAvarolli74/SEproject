@@ -59,7 +59,7 @@ export default function Landing() {
               variants={itemVariants}
               className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md rounded-full px-6 py-3 border border-white/20 w-fit"
             >
-              <Zap className="w-5 h-5 text-yellow-400" />
+        
               <span className="text-white text-sm font-medium">Welcome to SkillVerse</span>
             </motion.div>
 

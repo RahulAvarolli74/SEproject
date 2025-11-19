@@ -170,7 +170,7 @@ function Signup() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <span className="text-white text-sm font-medium">✨ Join SkillVerse</span>
+            <span className="text-white text-sm font-medium"> Join SkillVerse</span>
           </motion.div>
 
           <h1 className="text-3xl font-bold text-white mb-6">
